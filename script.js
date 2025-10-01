@@ -1,46 +1,118 @@
 // Portfolio Data - Add your projects here
 const portfolioData = [
+    // Commercial Projects
     {
         id: 1,
-        title: "Commercial Facility Renovation",
-        description: "Multi-million dollar renovation project coordinating international design teams",
+        title: "Commercial Office Renovation",
+        description: "Multi-million dollar office facility renovation with modern amenities",
         category: "Commercial",
-        image: "images/project1.jpg" // Replace with actual image path
+        image: "images/commercial1.jpg"
     },
     {
         id: 2,
-        title: "International Design Coordination",
-        description: "Managed 20+ architects and engineers across Americas and Europe",
-        category: "Management",
-        image: "images/project2.jpg" // Replace with actual image path
+        title: "Retail Center Design",
+        description: "Large-scale retail center with integrated parking and landscaping",
+        category: "Commercial",
+        image: "images/commercial2.jpg"
     },
     {
         id: 3,
-        title: "Building Systems Implementation",
-        description: "Technical adoption and stakeholder training for new building systems",
-        category: "Technical",
-        image: "images/project3.jpg" // Replace with actual image path
+        title: "Mixed-Use Development",
+        description: "Urban mixed-use project combining retail, office, and residential spaces",
+        category: "Commercial",
+        image: "images/commercial3.jpg"
     },
+    
+    // Residential Projects
     {
         id: 4,
-        title: "Stakeholder Presentation",
-        description: "Board presentations and contractor collaboration for complex projects",
-        category: "Communication",
-        image: "images/project4.jpg" // Replace with actual image path
+        title: "Modern Family Residence",
+        description: "Contemporary single-family home with sustainable design features",
+        category: "Residential",
+        image: "images/residential1.jpg"
     },
     {
         id: 5,
-        title: "Process Optimization",
-        description: "Structured onboarding and scalable process implementation",
-        category: "Operations",
-        image: "images/project5.jpg" // Replace with actual image path
+        title: "Luxury Apartment Complex",
+        description: "High-end residential development with premium amenities",
+        category: "Residential",
+        image: "images/residential2.jpg"
     },
     {
         id: 6,
-        title: "Cross-Cultural Project Management",
-        description: "Bilingual coordination between English and Spanish speaking teams",
-        category: "International",
-        image: "images/project6.jpg" // Replace with actual image path
+        title: "Custom Home Design",
+        description: "Bespoke residential design tailored to client specifications",
+        category: "Residential",
+        image: "images/residential3.jpg"
+    },
+    
+    // Construction Drawings
+    {
+        id: 7,
+        title: "Structural Detailing",
+        description: "Detailed construction drawings for structural components",
+        category: "Construction Drawings",
+        image: "images/construction1.jpg"
+    },
+    {
+        id: 8,
+        title: "MEP Coordination",
+        description: "Mechanical, electrical, and plumbing system integration drawings",
+        category: "Construction Drawings",
+        image: "images/construction2.jpg"
+    },
+    {
+        id: 9,
+        title: "Site Development Plans",
+        description: "Comprehensive site development and grading drawings",
+        category: "Construction Drawings",
+        image: "images/construction3.jpg"
+    },
+    
+    // Presentations
+    {
+        id: 10,
+        title: "Client Presentation Renderings",
+        description: "High-quality 3D renderings for client presentations",
+        category: "Presentations",
+        image: "images/presentation1.jpg"
+    },
+    {
+        id: 11,
+        title: "Stakeholder Review Materials",
+        description: "Presentation materials for board and stakeholder reviews",
+        category: "Presentations",
+        image: "images/presentation2.jpg"
+    },
+    {
+        id: 12,
+        title: "Design Development Package",
+        description: "Comprehensive design development presentation package",
+        category: "Presentations",
+        image: "images/presentation3.jpg"
+    },
+    
+    // Concepts
+    {
+        id: 13,
+        title: "Urban Planning Concept",
+        description: "Master planning concept for urban redevelopment",
+        category: "Concepts",
+        image: "images/concept1.jpg"
+    },
+    {
+        id: 14,
+        title: "Sustainable Design Study",
+        description: "Conceptual study for sustainable building practices",
+        category: "Concepts",
+        image: "images/concept2.jpg"
+    },
+    {
+        id: 15,
+        title: "Innovative Space Planning",
+        description: "Creative space planning concepts for optimal functionality",
+        category: "Concepts",
+        image: "images/concept3.jpg"
     }
 ];
 
@@ -94,7 +166,7 @@ window.addEventListener('scroll', () => {
 // Portfolio Gallery Functions
 function createPortfolioItem(project) {
     return `
-        <div class="portfolio-item fade-in">
+        <div class="portfolio-item fade-in" data-category="${project.category.toLowerCase().replace(' ', '-')}">
             <div class="portfolio-image">
                 <span>${project.title} - Image Placeholder</span>
             </div>
@@ -105,6 +177,56 @@ function createPortfolioItem(project) {
             </div>
         </div>
     `;
+}
+
+function createFilterButtons() {
+    const categories = [...new Set(portfolioData.map(project => project.category))];
+    const filterContainer = document.createElement('div');
+    filterContainer.className = 'portfolio-filters';
+    
+    // Add "All" button
+    filterContainer.innerHTML = `
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        ${categories.map(category => 
+            `<button class="filter-btn" data-filter="${category.toLowerCase().replace(' ', '-')}">${category}</button>`
+        ).join('')}
+    `;
+    
+    const portfolioSection = document.querySelector('.portfolio .container');
+    const portfolioTitle = document.querySelector('.portfolio .section-title');
+    portfolioSection.insertBefore(filterContainer, portfolioTitle.nextSibling);
+    
+    // Add filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const filter = btn.getAttribute('data-filter');
+            filterPortfolio(filter);
+        });
+    });
+}
+
+function filterPortfolio(filter) {
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    
+    portfolioItems.forEach(item => {
+        if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, 100);
+        } else {
+            item.classList.remove('visible');
+            setTimeout(() => {
+                item.style.display = 'none';
+            }, 300);
+        }
+    });
 }
 
 function loadPortfolio() {
@@ -118,12 +240,15 @@ function loadPortfolio() {
         portfolioGrid.innerHTML += portfolioItem;
     });
 
+    // Create filter buttons
+    createFilterButtons();
+
     // Add fade-in animation to portfolio items
     const portfolioItems = document.querySelectorAll('.portfolio-item');
     portfolioItems.forEach((item, index) => {
         setTimeout(() => {
             item.classList.add('visible');
-        }, index * 200);
+        }, index * 100);
     });
 }
 
