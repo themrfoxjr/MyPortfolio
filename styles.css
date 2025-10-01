@@ -65,7 +65,7 @@ body {
 }
 
 .nav-link:hover {
-    color: #3498db;
+    color: #6b8e23;
 }
 
 .nav-link::after {
@@ -75,7 +75,7 @@ body {
     height: 2px;
     bottom: -5px;
     left: 0;
-    background-color: #3498db;
+    background-color: #6b8e23;
     transition: width 0.3s ease;
 }
 
@@ -100,7 +100,7 @@ body {
 /* Hero Section */
 .hero {
     padding: 120px 0 80px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #87a96b 0%, #6b8e23 100%);
     color: white;
 }
 
@@ -139,7 +139,7 @@ body {
     display: inline-block;
     padding: 12px 30px;
     background: #ffffff;
-    color: #667eea;
+    color: #6b8e23;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
@@ -231,7 +231,7 @@ body {
 .expertise-item h4 {
     font-size: 1.3rem;
     margin-bottom: 1rem;
-    color: #3498db;
+    color: #6b8e23;
 }
 
 /* Portfolio Section */
@@ -250,8 +250,8 @@ body {
 .filter-btn {
     padding: 10px 20px;
     background: white;
-    border: 2px solid #3498db;
-    color: #3498db;
+    border: 2px solid #6b8e23;
+    color: #6b8e23;
     border-radius: 25px;
     font-weight: 500;
     cursor: pointer;
@@ -260,13 +260,13 @@ body {
 }
 
 .filter-btn:hover {
-    background: #3498db;
+    background: #6b8e23;
     color: white;
     transform: translateY(-2px);
 }
 
 .filter-btn.active {
-    background: #3498db;
+    background: #6b8e23;
     color: white;
 }
 
@@ -342,7 +342,7 @@ body {
 }
 
 .carousel-btn:hover {
-    background: #3498db;
+    background: #6b8e23;
     color: white;
     transform: translateY(-50%) scale(1.1);
 }
@@ -373,12 +373,12 @@ body {
 }
 
 .carousel-dot.active {
-    background: #3498db;
+    background: #6b8e23;
     transform: scale(1.2);
 }
 
 .carousel-dot:hover {
-    background: #3498db;
+    background: #6b8e23;
 }
 
 .project-info {
@@ -402,7 +402,7 @@ body {
 
 .project-category {
     display: inline-block;
-    background: #3498db;
+    background: #6b8e23;
     color: white;
     padding: 6px 16px;
     border-radius: 20px;
@@ -471,13 +471,13 @@ body {
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #3498db;
+    border-color: #6b8e23;
 }
 
 .submit-button {
     width: 100%;
     padding: 12px;
-    background: #3498db;
+    background: #6b8e23;
     color: white;
     border: none;
     border-radius: 8px;
@@ -488,7 +488,7 @@ body {
 }
 
 .submit-button:hover {
-    background: #2980b9;
+    background: #556b2f;
 }
 
 /* Footer */
