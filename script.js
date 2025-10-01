@@ -121,7 +121,19 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const contactForm = document.getElementById('contactForm');
-const portfolioGrid = document.querySelector('.portfolio-grid');
+const portfolioFilters = document.querySelector('.portfolio-filters');
+const carouselTrack = document.querySelector('.carousel-track');
+const carouselDots = document.querySelector('.carousel-dots');
+const prevBtn = document.querySelector('.carousel-prev');
+const nextBtn = document.querySelector('.carousel-next');
+const projectTitle = document.querySelector('.project-title');
+const projectDescription = document.querySelector('.project-description');
+const projectCategory = document.querySelector('.project-category');
+
+// Carousel State
+let currentCategory = null;
+let currentSlideIndex = 0;
+let currentProjects = [];
 
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
@@ -163,38 +175,15 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Portfolio Gallery Functions
-function createPortfolioItem(project) {
-    return `
-        <div class="portfolio-item fade-in" data-category="${project.category.toLowerCase().replace(' ', '-')}">
-            <div class="portfolio-image">
-                <span>${project.title} - Image Placeholder</span>
-            </div>
-            <div class="portfolio-content">
-                <h3>${project.title}</h3>
-                <p>${project.description}</p>
-                <div class="portfolio-category">${project.category}</div>
-            </div>
-        </div>
-    `;
-}
-
+// Portfolio Carousel Functions
 function createFilterButtons() {
     const categories = [...new Set(portfolioData.map(project => project.category))];
-    const filterContainer = document.createElement('div');
-    filterContainer.className = 'portfolio-filters';
     
-    // Add "All" button
-    filterContainer.innerHTML = `
-        <button class="filter-btn active" data-filter="all">All Projects</button>
+    portfolioFilters.innerHTML = `
         ${categories.map(category => 
-            `<button class="filter-btn" data-filter="${category.toLowerCase().replace(' ', '-')}">${category}</button>`
+            `<button class="filter-btn" data-category="${category.toLowerCase().replace(' ', '-')}">${category}</button>`
         ).join('')}
     `;
-    
-    const portfolioSection = document.querySelector('.portfolio .container');
-    const portfolioTitle = document.querySelector('.portfolio .section-title');
-    portfolioSection.insertBefore(filterContainer, portfolioTitle.nextSibling);
     
     // Add filter functionality
     const filterButtons = document.querySelectorAll('.filter-btn');
@@ -205,52 +194,111 @@ function createFilterButtons() {
             // Add active class to clicked button
             btn.classList.add('active');
             
-            const filter = btn.getAttribute('data-filter');
-            filterPortfolio(filter);
+            const category = btn.getAttribute('data-category');
+            loadCategory(category);
         });
     });
 }
 
-function filterPortfolio(filter) {
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
+function loadCategory(category) {
+    currentCategory = category;
+    currentSlideIndex = 0;
+    currentProjects = portfolioData.filter(project => 
+        project.category.toLowerCase().replace(' ', '-') === category
+    );
     
-    portfolioItems.forEach(item => {
-        if (filter === 'all' || item.getAttribute('data-category') === filter) {
-            item.style.display = 'block';
-            setTimeout(() => {
-                item.classList.add('visible');
-            }, 100);
-        } else {
-            item.classList.remove('visible');
-            setTimeout(() => {
-                item.style.display = 'none';
-            }, 300);
-        }
+    createCarouselSlides();
+    createCarouselDots();
+    updateProjectInfo();
+    showCarousel();
+}
+
+function createCarouselSlides() {
+    carouselTrack.innerHTML = '';
+    
+    currentProjects.forEach((project, index) => {
+        const slide = document.createElement('div');
+        slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+        slide.innerHTML = `
+            <div class="carousel-image">
+                <span>${project.title} - Image Placeholder</span>
+            </div>
+        `;
+        carouselTrack.appendChild(slide);
     });
 }
 
-function loadPortfolio() {
-    const portfolioPlaceholder = document.querySelector('.portfolio-placeholder');
-    if (portfolioPlaceholder) {
-        portfolioPlaceholder.remove();
+function createCarouselDots() {
+    carouselDots.innerHTML = '';
+    
+    currentProjects.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+        dot.setAttribute('data-index', index);
+        dot.addEventListener('click', () => goToSlide(index));
+        carouselDots.appendChild(dot);
+    });
+}
+
+function updateProjectInfo() {
+    if (currentProjects.length > 0) {
+        const currentProject = currentProjects[currentSlideIndex];
+        projectTitle.textContent = currentProject.title;
+        projectDescription.textContent = currentProject.description;
+        projectCategory.textContent = currentProject.category;
     }
-
-    portfolioData.forEach(project => {
-        const portfolioItem = createPortfolioItem(project);
-        portfolioGrid.innerHTML += portfolioItem;
-    });
-
-    // Create filter buttons
-    createFilterButtons();
-
-    // Add fade-in animation to portfolio items
-    const portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach((item, index) => {
-        setTimeout(() => {
-            item.classList.add('visible');
-        }, index * 100);
-    });
 }
+
+function showCarousel() {
+    // Remove placeholder if it exists
+    const placeholder = document.querySelector('.carousel-placeholder');
+    if (placeholder) {
+        placeholder.remove();
+    }
+}
+
+function goToSlide(index) {
+    if (index < 0 || index >= currentProjects.length) return;
+    
+    // Update slides
+    const slides = document.querySelectorAll('.carousel-slide');
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+    
+    // Update dots
+    const dots = document.querySelectorAll('.carousel-dot');
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
+    
+    // Update current index and project info
+    currentSlideIndex = index;
+    updateProjectInfo();
+}
+
+function nextSlide() {
+    const nextIndex = (currentSlideIndex + 1) % currentProjects.length;
+    goToSlide(nextIndex);
+}
+
+function prevSlide() {
+    const prevIndex = (currentSlideIndex - 1 + currentProjects.length) % currentProjects.length;
+    goToSlide(prevIndex);
+}
+
+// Carousel Navigation
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (currentProjects.length === 0) return;
+    
+    if (e.key === 'ArrowLeft') {
+        prevSlide();
+    } else if (e.key === 'ArrowRight') {
+        nextSlide();
+    }
+});
 
 // Contact Form Handler
 contactForm.addEventListener('submit', function(e) {
@@ -302,56 +350,19 @@ function initAnimations() {
     });
 }
 
-// Image lazy loading (for future implementation)
-function initLazyLoading() {
-    const images = document.querySelectorAll('img[data-src]');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-
-    images.forEach(img => imageObserver.observe(img));
-}
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Load portfolio items
-    loadPortfolio();
+    // Create filter buttons
+    createFilterButtons();
     
     // Initialize animations
     initAnimations();
     
-    // Initialize lazy loading
-    initLazyLoading();
-    
-    // Add CSS for portfolio category
+    // Add CSS for carousel
     const style = document.createElement('style');
     style.textContent = `
-        .portfolio-category {
-            display: inline-block;
-            background: #3498db;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            font-weight: 500;
-        }
-        
-        .lazy {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .lazy.loaded {
-            opacity: 1;
+        .carousel-slide {
+            transition: opacity 0.5s ease;
         }
     `;
     document.head.appendChild(style);
@@ -383,12 +394,3 @@ window.addEventListener('scroll', () => {
         // Handle scroll-based animations or effects
     }, 100);
 });
-
-// Export functions for potential module usage (if needed)
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        portfolioData,
-        createPortfolioItem,
-        loadPortfolio
-    };
-}
