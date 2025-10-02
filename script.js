@@ -3,66 +3,108 @@ const portfolioData = [
     // Commercial Projects
     {
         id: 1,
-        title: "Commercial Office Renovation",
-        description: "Multi-million dollar office facility renovation with modern amenities",
+        title: "Commercial Office Building",
+        description: "Modern commercial office facility with contemporary design and sustainable features",
         category: "Commercial",
-        image: "images/commercial1.jpg"
+        image: "images/Commercial1.png"
     },
     {
         id: 2,
-        title: "Retail Center Design",
-        description: "Large-scale retail center with integrated parking and landscaping",
+        title: "Retail Complex Design",
+        description: "Large-scale retail center with integrated commercial spaces and parking facilities",
         category: "Commercial",
-        image: "images/commercial2.jpg"
+        image: "images/Commercial2.png"
     },
     {
         id: 3,
-        title: "Mixed-Use Development",
-        description: "Urban mixed-use project combining retail, office, and residential spaces",
+        title: "Mixed-Use Development Project",
+        description: "Urban mixed-use development combining commercial, retail, and office spaces",
         category: "Commercial",
-        image: "images/commercial3.jpg"
+        image: "images/Commercial3.png"
+    },
+    {
+        id: 4,
+        title: "Commercial Facility Expansion",
+        description: "Expansion and renovation of existing commercial facility with modern amenities",
+        category: "Commercial",
+        image: "images/Commercial4.png"
+    },
+    {
+        id: 5,
+        title: "Corporate Headquarters",
+        description: "State-of-the-art corporate headquarters with integrated green spaces",
+        category: "Commercial",
+        image: "images/Commercial5.jpeg"
     },
     
     // Residential Projects
     {
-        id: 4,
-        title: "Modern Family Residence",
-        description: "Contemporary single-family home with sustainable design features",
-        category: "Residential",
-        image: "images/residential1.jpg"
-    },
-    {
-        id: 5,
-        title: "Luxury Apartment Complex",
-        description: "High-end residential development with premium amenities",
-        category: "Residential",
-        image: "images/residential2.jpg"
-    },
-    {
         id: 6,
-        title: "Custom Home Design",
-        description: "Bespoke residential design tailored to client specifications",
+        title: "Modern Single-Family Residence",
+        description: "Contemporary single-family home with sustainable design and modern amenities",
         category: "Residential",
-        image: "images/residential3.jpg"
+        image: "images/Residential1.png"
+    },
+    {
+        id: 7,
+        title: "Luxury Residential Development",
+        description: "High-end residential complex with premium finishes and community amenities",
+        category: "Residential",
+        image: "images/Residential2.png"
+    },
+    {
+        id: 8,
+        title: "Custom Home Design",
+        description: "Bespoke residential design tailored to client specifications and site conditions",
+        category: "Residential",
+        image: "images/Residential3.jpeg"
+    },
+    {
+        id: 9,
+        title: "Residential Community Planning",
+        description: "Master planning for residential community with integrated green spaces",
+        category: "Residential",
+        image: "images/Residential4.jpeg"
+    },
+    {
+        id: 10,
+        title: "Modern Townhouse Development",
+        description: "Contemporary townhouse development with efficient space planning",
+        category: "Residential",
+        image: "images/Residential5.jpeg"
+    },
+    {
+        id: 11,
+        title: "Luxury Villa Design",
+        description: "High-end villa design with premium materials and architectural details",
+        category: "Residential",
+        image: "images/Residential6.jpeg"
+    },
+    {
+        id: 12,
+        title: "Sustainable Residential Project",
+        description: "Eco-friendly residential design incorporating sustainable building practices",
+        category: "Residential",
+        image: "images/Residential7.jpeg"
     },
     
     // Construction Drawings
     {
-        id: 7,
+        id: 13,
         title: "Structural Detailing",
-        description: "Detailed construction drawings for structural components",
+        description: "Detailed construction drawings for structural components and systems",
         category: "Construction Drawings",
         image: "images/construction1.jpg"
     },
     {
-        id: 8,
+        id: 14,
         title: "MEP Coordination",
         description: "Mechanical, electrical, and plumbing system integration drawings",
         category: "Construction Drawings",
         image: "images/construction2.jpg"
     },
     {
-        id: 9,
+        id: 15,
         title: "Site Development Plans",
         description: "Comprehensive site development and grading drawings",
         category: "Construction Drawings",
@@ -71,21 +113,21 @@ const portfolioData = [
     
     // Presentations
     {
-        id: 10,
+        id: 16,
         title: "Client Presentation Renderings",
-        description: "High-quality 3D renderings for client presentations",
+        description: "High-quality 3D renderings for client presentations and approvals",
         category: "Presentations",
         image: "images/presentation1.jpg"
     },
     {
-        id: 11,
+        id: 17,
         title: "Stakeholder Review Materials",
         description: "Presentation materials for board and stakeholder reviews",
         category: "Presentations",
         image: "images/presentation2.jpg"
     },
     {
-        id: 12,
+        id: 18,
         title: "Design Development Package",
         description: "Comprehensive design development presentation package",
         category: "Presentations",
@@ -94,23 +136,23 @@ const portfolioData = [
     
     // Concepts
     {
-        id: 13,
+        id: 19,
         title: "Urban Planning Concept",
-        description: "Master planning concept for urban redevelopment",
+        description: "Master planning concept for urban redevelopment and revitalization",
         category: "Concepts",
         image: "images/concept1.jpg"
     },
     {
-        id: 14,
+        id: 20,
         title: "Sustainable Design Study",
-        description: "Conceptual study for sustainable building practices",
+        description: "Conceptual study for sustainable building practices and environmental integration",
         category: "Concepts",
         image: "images/concept2.jpg"
     },
     {
-        id: 15,
+        id: 21,
         title: "Innovative Space Planning",
-        description: "Creative space planning concepts for optimal functionality",
+        description: "Creative space planning concepts for optimal functionality and user experience",
         category: "Concepts",
         image: "images/concept3.jpg"
     }
@@ -220,9 +262,7 @@ function createCarouselSlides() {
         const slide = document.createElement('div');
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
         slide.innerHTML = `
-            <div class="carousel-image">
-                <span>${project.title} - Image Placeholder</span>
-            </div>
+            <img src="${project.image}" alt="${project.title}" class="carousel-image">
         `;
         carouselTrack.appendChild(slide);
     });
