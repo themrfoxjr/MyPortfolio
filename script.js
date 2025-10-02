@@ -177,6 +177,10 @@ let currentCategory = null;
 let currentSlideIndex = 0;
 let currentProjects = [];
 
+// Lightbox State
+let lightboxOpen = false;
+let lightboxCurrentIndex = 0;
+
 // Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
@@ -263,8 +267,23 @@ function createCarouselSlides() {
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
         slide.innerHTML = `
             <img src="${project.image}" alt="${project.title}" class="carousel-image">
+            <button class="expand-btn" data-index="${index}" aria-label="Expand image">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                </svg>
+            </button>
         `;
         carouselTrack.appendChild(slide);
+    });
+
+    // Add click event to expand buttons
+    const expandButtons = document.querySelectorAll('.expand-btn');
+    expandButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const index = parseInt(btn.getAttribute('data-index'));
+            openLightbox(index);
+        });
     });
 }
 
@@ -325,13 +344,125 @@ function prevSlide() {
     goToSlide(prevIndex);
 }
 
+// Lightbox Functions
+function openLightbox(index) {
+    if (currentProjects.length === 0) return;
+    
+    lightboxOpen = true;
+    lightboxCurrentIndex = index;
+    
+    // Create lightbox HTML
+    const lightboxHTML = `
+        <div class="lightbox-overlay">
+            <div class="lightbox-container">
+                <button class="lightbox-close" aria-label="Close lightbox">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+                <button class="lightbox-prev" aria-label="Previous image">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <div class="lightbox-content">
+                    <img src="${currentProjects[lightboxCurrentIndex].image}" alt="${currentProjects[lightboxCurrentIndex].title}" class="lightbox-image">
+                    <div class="lightbox-info">
+                        <h3 class="lightbox-title">${currentProjects[lightboxCurrentIndex].title}</h3>
+                        <p class="lightbox-description">${currentProjects[lightboxCurrentIndex].description}</p>
+                        <div class="lightbox-category">${currentProjects[lightboxCurrentIndex].category}</div>
+                    </div>
+                </div>
+                <button class="lightbox-next" aria-label="Next image">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', lightboxHTML);
+    document.body.style.overflow = 'hidden';
+    
+    // Add event listeners to lightbox
+    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    
+    lightboxOverlay.addEventListener('click', (e) => {
+        if (e.target === lightboxOverlay) {
+            closeLightbox();
+        }
+    });
+    
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', lightboxPrevSlide);
+    lightboxNext.addEventListener('click', lightboxNextSlide);
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', handleLightboxKeyboard);
+}
+
+function closeLightbox() {
+    const lightboxOverlay = document.querySelector('.lightbox-overlay');
+    if (lightboxOverlay) {
+        lightboxOverlay.remove();
+    }
+    document.body.style.overflow = '';
+    lightboxOpen = false;
+    document.removeEventListener('keydown', handleLightboxKeyboard);
+}
+
+function lightboxNextSlide() {
+    lightboxCurrentIndex = (lightboxCurrentIndex + 1) % currentProjects.length;
+    updateLightboxContent();
+}
+
+function lightboxPrevSlide() {
+    lightboxCurrentIndex = (lightboxCurrentIndex - 1 + currentProjects.length) % currentProjects.length;
+    updateLightboxContent();
+}
+
+function updateLightboxContent() {
+    const lightboxImage = document.querySelector('.lightbox-image');
+    const lightboxTitle = document.querySelector('.lightbox-title');
+    const lightboxDescription = document.querySelector('.lightbox-description');
+    const lightboxCategory = document.querySelector('.lightbox-category');
+    
+    if (lightboxImage && currentProjects[lightboxCurrentIndex]) {
+        lightboxImage.src = currentProjects[lightboxCurrentIndex].image;
+        lightboxImage.alt = currentProjects[lightboxCurrentIndex].title;
+        lightboxTitle.textContent = currentProjects[lightboxCurrentIndex].title;
+        lightboxDescription.textContent = currentProjects[lightboxCurrentIndex].description;
+        lightboxCategory.textContent = currentProjects[lightboxCurrentIndex].category;
+    }
+}
+
+function handleLightboxKeyboard(e) {
+    if (!lightboxOpen) return;
+    
+    switch(e.key) {
+        case 'Escape':
+            closeLightbox();
+            break;
+        case 'ArrowLeft':
+            lightboxPrevSlide();
+            break;
+        case 'ArrowRight':
+            lightboxNextSlide();
+            break;
+    }
+}
+
 // Carousel Navigation
 prevBtn.addEventListener('click', prevSlide);
 nextBtn.addEventListener('click', nextSlide);
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
-    if (currentProjects.length === 0) return;
+    if (currentProjects.length === 0 || lightboxOpen) return;
     
     if (e.key === 'ArrowLeft') {
         prevSlide();
@@ -398,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize animations
     initAnimations();
     
-    // Add CSS for carousel
+    // Add CSS for carousel and lightbox
     const style = document.createElement('style');
     style.textContent = `
         .carousel-slide {
@@ -406,31 +537,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
-});
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    // Close mobile menu if window is resized to desktop size
-    if (window.innerWidth > 768) {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    }
-});
-
-// Error handling for images
-document.addEventListener('error', function(e) {
-    if (e.target.tagName === 'IMG') {
-        console.warn('Image failed to load:', e.target.src);
-        // You could add a fallback image here
-        // e.target.src = 'images/fallback.jpg';
-    }
-}, true);
-
-// Performance optimization: Debounce scroll events
-let scrollTimeout;
-window.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-        // Handle scroll-based animations or effects
-    }, 100);
 });
