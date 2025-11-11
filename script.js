@@ -138,21 +138,21 @@ const portfolioData = [
     {
         id: 19,
         title: "Office Conversion",
-        description: "Master planning concept for urban redevelopment and revitalization",
+        description: "Planning concept for conversion of maintenancebuilding into offices",
         category: "Concepts",
         image: "images/concept1.jpg"
     },
     {
         id: 20,
         title: "Warehouse to Maintenance Building conversion",
-        description: "Conceptual study for sustainable building practices and environmental integration",
+        description: "Conceptual study for conversion of warehouse into Maintenance shops for campus",
         category: "Concepts",
         image: "images/concept2.jpg"
     },
     {
         id: 21,
         title: "New Pool and Gym Concept",
-        description: "Creative space planning concepts for optimal functionality and user experience",
+        description: "Space planning concepts for development of new recreation center with gym and pool",
         category: "Concepts",
         image: "images/concept3.jpg"
     }
