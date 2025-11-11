@@ -299,10 +299,15 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Firefox compatibility */
+    -moz-transition: opacity 0.5s ease;
+    will-change: opacity;
 }
 
 .carousel-slide.active {
     opacity: 1;
+    /* Ensure active slide is on top in Firefox */
+    z-index: 1;
 }
 
 .carousel-image {

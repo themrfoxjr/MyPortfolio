@@ -332,6 +332,16 @@ function goToSlide(index) {
     // Update current index and project info
     currentSlideIndex = index;
     updateProjectInfo();
+    
+    // Firefox compatibility - force reflow to ensure transitions work
+    if (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) {
+        const track = document.querySelector('.carousel-track');
+        if (track) {
+            track.style.display = 'none';
+            track.offsetHeight; // Force reflow
+            track.style.display = '';
+        }
+    }
 }
 
 function nextSlide() {
