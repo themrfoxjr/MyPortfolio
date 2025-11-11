@@ -257,7 +257,6 @@ function loadCategory(category) {
     createCarouselDots();
     updateProjectInfo();
     showCarousel();
-    setupCarouselNavigation();
 }
 
 function createCarouselSlides() {
@@ -457,23 +456,16 @@ function handleLightboxKeyboard(e) {
     }
 }
 
-// Carousel Navigation
-function setupCarouselNavigation() {
-    // Remove existing event listeners to prevent duplicates
-    const newPrevBtn = prevBtn.cloneNode(true);
-    const newNextBtn = nextBtn.cloneNode(true);
+// Carousel Navigation - Event Delegation
+document.addEventListener('click', (e) => {
+    if (currentProjects.length === 0 || lightboxOpen) return;
     
-    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
-    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
-    
-    // Update references to the new buttons
-    const updatedPrevBtn = document.querySelector('.carousel-prev');
-    const updatedNextBtn = document.querySelector('.carousel-next');
-    
-    // Add fresh event listeners
-    updatedPrevBtn.addEventListener('click', prevSlide);
-    updatedNextBtn.addEventListener('click', nextSlide);
-}
+    if (e.target.closest('.carousel-prev')) {
+        prevSlide();
+    } else if (e.target.closest('.carousel-next')) {
+        nextSlide();
+    }
+});
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
