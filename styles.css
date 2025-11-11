@@ -305,10 +305,6 @@ body {
     opacity: 1;
 }
 
-.carousel-slide {
-    position: relative;
-}
-
 .carousel-image {
     width: 100%;
     height: 100%;
