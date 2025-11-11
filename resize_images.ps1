@@ -32,7 +32,8 @@ Write-Host "Found $($imageFiles.Count) image files to process..." -ForegroundCol
 
 foreach ($image in $imageFiles) {
     $sourcePath = $image.FullName
-    $destPath = Join-Path $destFolder $image.Name
+    $destName = $image.BaseName + ".jpg"
+    $destPath = Join-Path $destFolder $destName
     
     Write-Host "Processing: $($image.Name)" -ForegroundColor White
     
@@ -50,8 +51,22 @@ foreach ($image in $imageFiles) {
     
     Write-Host "  Original dimensions: ${width}x${height}" -ForegroundColor Gray
     
+    # Check if image is PNG and needs conversion to JPG
+    if ($image.Extension -eq ".png") {
+        Write-Host "  Converting PNG to JPG at ${quality}% quality" -ForegroundColor Yellow
+        
+        # Convert PNG to JPG with 80% quality
+        & magick $sourcePath -quality $quality $destPath
+        
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  Successfully converted to JPG and saved to $destPath" -ForegroundColor Green
+        } else {
+            Write-Host "  Error converting image, copying file instead" -ForegroundColor Red
+            Copy-Item $sourcePath $destPath
+        }
+    }
     # Check if image is smaller than 1080p
-    if ($width -le $targetWidth -and $height -le $targetHeight) {
+    elseif ($width -le $targetWidth -and $height -le $targetHeight) {
         Write-Host "  Image is smaller than 1080p, copying file" -ForegroundColor Green
         Copy-Item $sourcePath $destPath
     } else {

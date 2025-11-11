@@ -34,7 +34,7 @@ const portfolioData = [
         title: "Lecture Hall - in Progress",
         description: "230+ Lecture Hall, complete remodel. Addison, IL",
         category: "Commercial",
-        image: "images/Commercial5.jpeg"
+        image: "images/Commercial5.jpg"
     },
     
     // Residential Projects
@@ -57,35 +57,35 @@ const portfolioData = [
         title: "Home Remodel",
         description: "Complete House Remodel",
         category: "Residential",
-        image: "images/Residential3.jpeg"
+        image: "images/Residential3.jpg"
     },
     {
         id: 9,
         title: "Home Remodel",
         description: "Living Room - Before",
         category: "Residential",
-        image: "images/Residential4.jpeg"
+        image: "images/Residential4.jpg"
     },
     {
         id: 10,
         title: "Home Remodel",
         description: "Living Room - After",
         category: "Residential",
-        image: "images/Residential5.jpeg"
+        image: "images/Residential5.jpg"
     },
     {
         id: 11,
         title: "Home Remodel",
         description: "Kitchen - Before",
         category: "Residential",
-        image: "images/Residential6.jpeg"
+        image: "images/Residential6.jpg"
     },
     {
         id: 12,
         title: "Home Remodel",
         description: "Kitchen - After",
         category: "Residential",
-        image: "images/Residential7.jpeg"
+        image: "images/Residential7.jpg"
     },
     
     // Construction Drawings
