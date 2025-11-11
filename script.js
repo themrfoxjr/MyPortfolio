@@ -124,14 +124,14 @@ const portfolioData = [
         title: "Residential Project - Stakeholder Review Materials",
         description: "Presentation materials for board and stakeholder reviews",
         category: "Presentations",
-        image: "images/presentation2.jpg"
+        image: "images/Presentation2.jpg"
     },
     {
         id: 18,
         title: "Design Development Package",
         description: "Comprehensive design development presentation package",
         category: "Presentations",
-        image: "images/presentation3.jpg"
+        image: "images/Presentation3.jpg"
     },
     
     // Concepts
@@ -140,21 +140,21 @@ const portfolioData = [
         title: "Office Conversion",
         description: "Planning concept for conversion of maintenancebuilding into offices",
         category: "Concepts",
-        image: "images/concept1.jpg"
+        image: "images/concepts1.jpg"
     },
     {
         id: 20,
         title: "Warehouse to Maintenance Building conversion",
         description: "Conceptual study for conversion of warehouse into Maintenance shops for campus",
         category: "Concepts",
-        image: "images/concept2.jpg"
+        image: "images/Concepts2.jpg"
     },
     {
         id: 21,
         title: "New Pool and Gym Concept",
         description: "Space planning concepts for development of new recreation center with gym and pool",
         category: "Concepts",
-        image: "images/concept3.jpg"
+        image: "images/Concepts3.jpg"
     }
 ];
 
