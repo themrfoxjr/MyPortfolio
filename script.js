@@ -257,6 +257,7 @@ function loadCategory(category) {
     createCarouselDots();
     updateProjectInfo();
     showCarousel();
+    setupCarouselNavigation();
 }
 
 function createCarouselSlides() {
@@ -457,8 +458,22 @@ function handleLightboxKeyboard(e) {
 }
 
 // Carousel Navigation
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
+function setupCarouselNavigation() {
+    // Remove existing event listeners to prevent duplicates
+    const newPrevBtn = prevBtn.cloneNode(true);
+    const newNextBtn = nextBtn.cloneNode(true);
+    
+    prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+    nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+    
+    // Update references to the new buttons
+    const updatedPrevBtn = document.querySelector('.carousel-prev');
+    const updatedNextBtn = document.querySelector('.carousel-next');
+    
+    // Add fresh event listeners
+    updatedPrevBtn.addEventListener('click', prevSlide);
+    updatedNextBtn.addEventListener('click', nextSlide);
+}
 
 // Keyboard navigation
 document.addEventListener('keydown', (e) => {
