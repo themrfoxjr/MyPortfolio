@@ -94,21 +94,21 @@ const portfolioData = [
         title: "Electrical Drawings",
         description: "Detailed construction drawings for electrical components and systems",
         category: "Construction Drawings",
-        image: "images/construction1.jpg"
+        image: "images/Construction1.jpg"
     },
     {
         id: 14,
         title: "Finishes plan",
         description: "Furniture, cabinetry, flooring and paint",
         category: "Construction Drawings",
-        image: "images/construction2.jpg"
+        image: "images/Construction2.jpg"
     },
     {
         id: 15,
         title: "Site Development Plans",
         description: "Site water, seweage, gas plans",
         category: "Construction Drawings",
-        image: "images/construction3.jpg"
+        image: "images/Construction3.jpg"
     },
     
     // Presentations
