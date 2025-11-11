@@ -162,7 +162,6 @@ const portfolioData = [
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
-const contactForm = document.getElementById('contactForm');
 const portfolioFilters = document.querySelector('.portfolio-filters');
 const carouselTrack = document.querySelector('.carousel-track');
 const carouselDots = document.querySelector('.carousel-dots');
@@ -488,33 +487,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Contact Form Handler
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const submitButton = this.querySelector('.submit-button');
-    const originalText = submitButton.textContent;
-    
-    // Show loading state
-    submitButton.textContent = 'Sending...';
-    submitButton.classList.add('loading');
-    
-    // Simulate form submission (replace with actual form handling)
-    setTimeout(() => {
-        submitButton.textContent = 'Message Sent!';
-        submitButton.classList.remove('loading');
-        submitButton.classList.add('success');
-        
-        // Reset form
-        this.reset();
-        
-        // Reset button after 3 seconds
-        setTimeout(() => {
-            submitButton.textContent = originalText;
-            submitButton.classList.remove('success');
-        }, 3000);
-    }, 2000);
-});
 
 // Intersection Observer for fade-in animations
 const observerOptions = {
