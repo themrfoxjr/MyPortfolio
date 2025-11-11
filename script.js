@@ -3,36 +3,36 @@ const portfolioData = [
     // Commercial Projects
     {
         id: 1,
-        title: "Commercial Office Building",
-        description: "Modern commercial office facility with contemporary design and sustainable features",
+        title: "Educational Center Lobby",
+        description: "Modern educational facilities with contemporary design and sustainable features",
         category: "Commercial",
-        image: "images/Commercial1.png"
+        image: "images/Commercial1.jpg"
     },
     {
         id: 2,
-        title: "Retail Complex Design",
-        description: "Large-scale retail center with integrated commercial spaces and parking facilities",
+        title: "Educational Center Lobby",
+        description: "Modern educational facilities with contemporary design and sustainable features",
         category: "Commercial",
-        image: "images/Commercial2.png"
+        image: "images/Commercial2.jpg"
     },
     {
         id: 3,
-        title: "Mixed-Use Development Project",
-        description: "Urban mixed-use development combining commercial, retail, and office spaces",
+        title: "Adult Training Classroom",
+        description: "Multiple classrroms for international student training, including A/V installations and A/C in Costa Rica",
         category: "Commercial",
-        image: "images/Commercial3.png"
+        image: "images/Commercial3.jpg"
     },
     {
         id: 4,
-        title: "Commercial Facility Expansion",
-        description: "Expansion and renovation of existing commercial facility with modern amenities",
+        title: "Adult Training Classroom",
+        description: "Multiple classrroms for international student training, including A/V installations and A/C in Costa Rica",
         category: "Commercial",
-        image: "images/Commercial4.png"
+        image: "images/Commercial4.jpg"
     },
     {
         id: 5,
-        title: "Corporate Headquarters",
-        description: "State-of-the-art corporate headquarters with integrated green spaces",
+        title: "Lecture Hall - in Progress",
+        description: "230+ Lecture Hall, complete remodel. Addison, IL",
         category: "Commercial",
         image: "images/Commercial5.jpeg"
     },
@@ -40,50 +40,50 @@ const portfolioData = [
     // Residential Projects
     {
         id: 6,
-        title: "Modern Single-Family Residence",
-        description: "Contemporary single-family home with sustainable design and modern amenities",
+        title: "Modern Missionary Campus Room",
+        description: "Contemporary studio apartment with sustainable design and modern amenities",
         category: "Residential",
-        image: "images/Residential1.png"
+        image: "images/Residential1.jpg"
     },
     {
         id: 7,
-        title: "Luxury Residential Development",
-        description: "High-end residential complex with premium finishes and community amenities",
+        title: "Modern Missionary Campus Room",
+        description: "Contemporary studio apartment with sustainable design and modern amenities",
         category: "Residential",
-        image: "images/Residential2.png"
+        image: "images/Residential2.jpg"
     },
     {
         id: 8,
-        title: "Custom Home Design",
-        description: "Bespoke residential design tailored to client specifications and site conditions",
+        title: "Home Remodel",
+        description: "Complete House Remodel",
         category: "Residential",
         image: "images/Residential3.jpeg"
     },
     {
         id: 9,
-        title: "Residential Community Planning",
-        description: "Master planning for residential community with integrated green spaces",
+        title: "Home Remodel",
+        description: "Living Room - Before",
         category: "Residential",
         image: "images/Residential4.jpeg"
     },
     {
         id: 10,
-        title: "Modern Townhouse Development",
-        description: "Contemporary townhouse development with efficient space planning",
+        title: "Home Remodel",
+        description: "Living Room - After",
         category: "Residential",
         image: "images/Residential5.jpeg"
     },
     {
         id: 11,
-        title: "Luxury Villa Design",
-        description: "High-end villa design with premium materials and architectural details",
+        title: "Home Remodel",
+        description: "Kitchen - Before",
         category: "Residential",
         image: "images/Residential6.jpeg"
     },
     {
         id: 12,
-        title: "Sustainable Residential Project",
-        description: "Eco-friendly residential design incorporating sustainable building practices",
+        title: "Home Remodel",
+        description: "Kitchen - After",
         category: "Residential",
         image: "images/Residential7.jpeg"
     },
@@ -91,22 +91,22 @@ const portfolioData = [
     // Construction Drawings
     {
         id: 13,
-        title: "Structural Detailing",
-        description: "Detailed construction drawings for structural components and systems",
+        title: "Electrical Drawings",
+        description: "Detailed construction drawings for electrical components and systems",
         category: "Construction Drawings",
         image: "images/construction1.jpg"
     },
     {
         id: 14,
-        title: "MEP Coordination",
-        description: "Mechanical, electrical, and plumbing system integration drawings",
+        title: "Finishes plan",
+        description: "Furniture, cabinetry, flooring and paint",
         category: "Construction Drawings",
         image: "images/construction2.jpg"
     },
     {
         id: 15,
         title: "Site Development Plans",
-        description: "Comprehensive site development and grading drawings",
+        description: "Site water, seweage, gas plans",
         category: "Construction Drawings",
         image: "images/construction3.jpg"
     },
