@@ -114,14 +114,14 @@ const portfolioData = [
     // Presentations
     {
         id: 16,
-        title: "Client Presentation Renderings",
-        description: "High-quality 3D renderings for client presentations and approvals",
+        title: "Client Presentation of Design Concept",
+        description: "High level renders and sections for shareholders",
         category: "Presentations",
         image: "images/presentation1.jpg"
     },
     {
         id: 17,
-        title: "Stakeholder Review Materials",
+        title: "Residential Project - Stakeholder Review Materials",
         description: "Presentation materials for board and stakeholder reviews",
         category: "Presentations",
         image: "images/presentation2.jpg"
@@ -137,21 +137,21 @@ const portfolioData = [
     // Concepts
     {
         id: 19,
-        title: "Urban Planning Concept",
+        title: "Office Conversion",
         description: "Master planning concept for urban redevelopment and revitalization",
         category: "Concepts",
         image: "images/concept1.jpg"
     },
     {
         id: 20,
-        title: "Sustainable Design Study",
+        title: "Warehouse to Maintenance Building conversion",
         description: "Conceptual study for sustainable building practices and environmental integration",
         category: "Concepts",
         image: "images/concept2.jpg"
     },
     {
         id: 21,
-        title: "Innovative Space Planning",
+        title: "New Pool and Gym Concept",
         description: "Creative space planning concepts for optimal functionality and user experience",
         category: "Concepts",
         image: "images/concept3.jpg"
